@@ -1,0 +1,15 @@
+{
+  "name": "rfd",
+  "version": "0.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.16.1",
+    "concurrently": "^8.2.0"
+  },
+  "scripts": {
+    "start": "conc 'watch -n5 napi build --platform' 'node --test --watch'",
+    "prepack": "napi build --platform --release",
+    "test": "napi build --platform && node --test",
+    "version": "napi version"
+  }
+}
