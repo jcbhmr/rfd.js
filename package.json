@@ -10,6 +10,9 @@
     "test": "napi build --platform && node --test",
     "version": "napi version"
   },
+  "exports": {
+    "node-addons": "./index.js"
+  },
   "devDependencies": {
     "@napi-rs/cli": "^2.16.1",
     "concurrently": "^8.2.0",
