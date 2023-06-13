@@ -252,6 +252,11 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { FileDialog } = nativeBinding
+const { FileDialog, AsyncFileDialog, FileHandle, MessageDialog, MessageLevel, MessageButtons } = nativeBinding
 
 module.exports.FileDialog = FileDialog
+module.exports.AsyncFileDialog = AsyncFileDialog
+module.exports.FileHandle = FileHandle
+module.exports.MessageDialog = MessageDialog
+module.exports.MessageLevel = MessageLevel
+module.exports.MessageButtons = MessageButtons
