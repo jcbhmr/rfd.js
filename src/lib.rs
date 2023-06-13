@@ -240,8 +240,8 @@ impl MessageDialog {
     }
 
     #[napi]
-    pub fn set_buttons(&mut self, buttons: MessageButtons) -> &Self {
-        self.n = self.n.clone().set_buttons(buttons.to_rfd_message_buttons());
+    pub fn set_buttons(&mut self, buttons: &MessageButtons) -> &Self {
+        self.n = self.n.clone().set_buttons(buttons.n.clone());
         return self;
     }
 
@@ -252,7 +252,7 @@ impl MessageDialog {
     }
 }
 
-#[napi]
+#[napi(string_enum)]
 pub enum MessageLevel {
     Info,
     Warning,
@@ -269,17 +269,93 @@ impl MessageLevel {
 }
 
 #[napi]
-pub enum MessageButtons {
-    Ok,
-    OkCancel,
-    YesNo,
+pub struct MessageButtons {
+    n: rfd::MessageButtons,
 }
+#[napi]
 impl MessageButtons {
-    pub fn to_rfd_message_buttons(&self) -> rfd::MessageButtons {
-        match self {
-            MessageButtons::Ok => rfd::MessageButtons::Ok,
-            MessageButtons::OkCancel => rfd::MessageButtons::OkCancel,
-            MessageButtons::YesNo => rfd::MessageButtons::YesNo,
-        }
+    #[napi(js_name = "Ok")]
+    pub fn ok() -> Self {
+        let n = rfd::MessageButtons::Ok;
+        return Self { n };
+    }
+
+    #[napi(js_name = "OkCancel")]
+    pub fn ok_cancel() -> Self {
+        let n = rfd::MessageButtons::OkCancel;
+        return Self { n };
+    }
+
+    #[napi(js_name = "YesNo")]
+    pub fn yes_no() -> Self {
+        let n = rfd::MessageButtons::YesNo;
+        return Self { n };
+    }
+
+    #[napi(factory, js_name = "OkCustom")]
+    pub fn ok_custom(x: String) -> Self {
+        let n = rfd::MessageButtons::OkCustom(x);
+        return Self { n };
+    }
+
+    #[napi(factory, js_name = "OkCancelCustom")]
+    pub fn ok_cancel_custom(x: String, y: String) -> Self {
+        let n = rfd::MessageButtons::OkCancelCustom(x, y);
+        return Self { n };
+    }
+
+    #[napi]
+    pub fn to_string(&self) -> String {
+        let s = match self.n.clone() {
+            rfd::MessageButtons::Ok => "Ok".to_string(),
+            rfd::MessageButtons::OkCancel => "OkCancel".to_string(),
+            rfd::MessageButtons::YesNo => "YesNo".to_string(),
+            rfd::MessageButtons::OkCustom(x) => format!("OkCustom({})", x),
+            rfd::MessageButtons::OkCancelCustom(x, y) => format!("OkCancelCustom({}, {})", x, y),
+        };
+        return s;
+    }
+}
+
+#[napi]
+pub struct AsyncMessageDialog {
+    n: rfd::AsyncMessageDialog,
+}
+#[napi]
+impl AsyncMessageDialog {
+    #[napi(constructor)]
+    pub fn new() -> Self {
+        let n = rfd::AsyncMessageDialog::new();
+        return Self { n };
+    }
+
+    #[napi]
+    pub fn set_level(&mut self, level: MessageLevel) -> &Self {
+        self.n = self.n.clone().set_level(level.to_rfd_message_level());
+        return self;
+    }
+
+    #[napi]
+    pub fn set_title(&mut self, title: String) -> &Self {
+        self.n = self.n.clone().set_title(&title);
+        return self;
+    }
+
+    #[napi]
+    pub fn set_description(&mut self, description: String) -> &Self {
+        self.n = self.n.clone().set_description(&description);
+        return self;
+    }
+
+    #[napi]
+    pub fn set_buttons(&mut self, buttons: &MessageButtons) -> &Self {
+        self.n = self.n.clone().set_buttons(buttons.n.clone());
+        return self;
+    }
+
+    #[napi]
+    pub async unsafe fn show(&mut self) -> bool {
+        let n = self.n.clone();
+        return n.show().await;
     }
 }

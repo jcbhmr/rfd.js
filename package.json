@@ -1,15 +1,19 @@
 {
-  "name": "rfd",
+  "name": "@jcbhmr/rfd",
   "version": "0.0.0",
   "license": "MIT",
-  "devDependencies": {
-    "@napi-rs/cli": "^2.16.1",
-    "concurrently": "^8.2.0"
-  },
   "scripts": {
-    "start": "conc 'watch -n5 napi build --platform' 'node --test --watch'",
+    "build:debug": "napi build --platform",
     "prepack": "napi build --platform --release",
+    "start": "conc 'watch -n5 napi build --platform' 'node --test --watch'",
+    "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test",
     "version": "napi version"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.16.1",
+    "concurrently": "^8.2.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-packagejson": "^2.4.3"
   }
 }
