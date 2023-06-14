@@ -1,6 +1,7 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/javascript-node",
+  "image": "ghcr.io/crazy-max/osxcross",
   "features": {
+    "ghcr.io/devcontainers/features/node": {},
     "ghcr.io/devcontainers/features/rust": {},
     "ghcr.io/devcontainers-contrib/features/zig": {},
     "./features/cmake": {},
