@@ -21,6 +21,7 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
 jobs:
+  # So far, the 'test-rust' task is just making sure it builds. 🤣
   test-rust:
     runs-on: ubuntu-latest
     steps:
