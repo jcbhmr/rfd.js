@@ -26,7 +26,7 @@
   "scripts": {
     "build:debug": "napi build --platform",
     "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
-    "prepack": "napi build --platform --release --target x86_64-apple-darwin && napi build --platform --release --target x86_64-unknown-linux-gnu && napi build --platform --release --target x86_64-pc-windows-msvc",
+    "prepack": "echo napi build --platform --release --target x86_64-apple-darwin && napi build --platform --release --target x86_64-unknown-linux-gnu && napi build --platform --release --target x86_64-pc-windows-msvc",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test"
   },

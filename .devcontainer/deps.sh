@@ -11,6 +11,15 @@ sudo apt-get install -y --no-install-recommends \
 # zig (devcontainer)
 # llvm (devcontainer)
 # TODO: Fix "library not found for '-lobjc'"
+
+# pushd "$(mktemp -d)"
+# curl -fsSLO http://crosstool-ng.org/download/crosstool-ng/crosstool-ng-1.25.0.tar.xz
+# tar -xzvf crosstool-ng-*.tar.xz
+# cd crosstool-ng-*
+# ./configure --prefix=/usr/local
+# make
+# sudo make install
+# popd
 rustup target add x86_64-apple-darwin
 
 # Windows
