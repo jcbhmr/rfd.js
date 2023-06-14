@@ -1,10 +1,7 @@
 {
   "image": "mcr.microsoft.com/devcontainers/javascript-node",
   "features": {
-    "ghcr.io/devcontainers/features/rust": {},
-    "ghcr.io/devcontainers-contrib/features/zig": {},
-    "./features/llvm": {},
-    "./features/cmake": {}
+    "ghcr.io/devcontainers/features/rust": {}
   },
-  "updateContentCommand": ".devcontainer/sys-deps.sh && .devcontainer/cross-compile-deps.sh"
+  "updateContentCommand": "export DEBIAN_FRONTEND=noninteractive && sudo apt-get update -y && sudo apt-get install -y --no-install-recommends libglib2.0-dev libatk1.0-dev libgtk-3-dev && sudo rm -rf /var/lib/apt/lists/*"
 }

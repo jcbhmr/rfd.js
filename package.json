@@ -24,7 +24,7 @@
     "index*.node"
   ],
   "scripts": {
-    "build:debug": "napi build --platform",
+    "build:debug": "napi build --platform --target x86-",
     "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
     "prepack": "napi build --platform --release",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
