@@ -11,7 +11,7 @@ pub enum MessageButtons {
     YesNo,
 }
 impl MessageButtons {
-    pub fn to_rfd_t(&self) -> rfd::MessageButtons {
+    pub(super) fn to_rfd_t(&self) -> rfd::MessageButtons {
         match self {
             MessageButtons::Ok => rfd::MessageButtons::Ok,
             MessageButtons::OkCancel => rfd::MessageButtons::OkCancel,

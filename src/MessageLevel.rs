@@ -11,7 +11,7 @@ pub enum MessageLevel {
     Error,
 }
 impl MessageLevel {
-    pub fn to_rfd_t(&self) -> rfd::MessageLevel {
+    pub(super) fn to_rfd_t(&self) -> rfd::MessageLevel {
         match self {
             MessageLevel::Info => rfd::MessageLevel::Info,
             MessageLevel::Warning => rfd::MessageLevel::Warning,

@@ -68,6 +68,7 @@ impl FileDialog {
         }
         let path_buf = path_buf.unwrap();
         let path = path_buf.to_str();
+
         if path.is_none() {
             return Err(Error::from_reason("Invalid UTF-8"));
         }

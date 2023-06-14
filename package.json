@@ -1,20 +1,41 @@
 {
   "name": "@jcbhmr/rfd",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "📂 Rust File Dialog bindings for JavaScript",
+  "keywords": [
+    "nodejs",
+    "rust",
+    "bindings",
+    "nodejs-addon",
+    "napi-rs"
+  ],
+  "homepage": "https://jcbhmr.github.io/rfd/",
+  "bugs": "https://github.com/jcbhmr/rfd/issues",
+  "repository": "github:jcbhmr/rfd",
   "license": "MIT",
+  "author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)",
+  "type": "module",
   "exports": {
     "node-addons": "./index.js"
   },
   "scripts": {
     "build:debug": "napi build --platform",
+    "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
     "prepack": "napi build --platform --release",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
-    "test": "napi build --platform && node --test",
-    "version": "napi version"
+    "test": "napi build --platform && node --test"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.16.1",
     "prettier": "^2.8.8",
-    "prettier-plugin-packagejson": "^2.4.3"
+    "prettier-plugin-packagejson": "^2.4.3",
+    "typedoc": "^0.24.8"
+  },
+  "typedocOptions": {
+    "entryPoints": [
+      "index.d.ts"
+    ],
+    "out": "docs/dist",
+    "skipErrorChecking": true
   }
 }
