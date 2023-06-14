@@ -18,6 +18,11 @@
   "exports": {
     "node-addons": "./index.js"
   },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "index*.node"
+  ],
   "scripts": {
     "build:debug": "napi build --platform",
     "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
