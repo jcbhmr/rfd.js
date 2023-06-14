@@ -6,5 +6,5 @@
     "./features/cmake": {},
     "./features/llvm": {}
   },
-  "updateContentCommand": ".devcontainer/cross-compile/deps.sh"
+  "updateContentCommand": ".devcontainer/deps.sh"
 }
