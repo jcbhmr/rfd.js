@@ -49,6 +49,8 @@ jobs:
       - uses: hecrj/setup-rust-action@v1
         with:
           components: cargo-fmt
+        # https://github.com/hecrj/setup-rust-action/issues/32
+        continue-on-error: true
       - if: runner.os == 'Linux'
         run: export DEBIAN_FRONTEND=noninteractive && sudo apt-get update -y && sudo apt-get install -y --no-install-recommends libglib2.0-dev libatk1.0-dev libgtk-3-dev && sudo rm -rf /var/lib/apt/lists/*
       - if: runner.os == 'macOS'
