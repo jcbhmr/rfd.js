@@ -1,0 +1,12 @@
+{
+  "id": "llvm",
+  "name": "LLVM",
+  "version": "1.0.0",
+  "options": {
+    "version": {
+      "description": "LLVM version",
+      "type": "string",
+      "default": "latest"
+    }
+  }
+}

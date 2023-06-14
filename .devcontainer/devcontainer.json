@@ -1,0 +1,10 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/javascript-node",
+  "features": {
+    "ghcr.io/devcontainers/features/rust": {},
+    "ghcr.io/devcontainers-contrib/features/zig": {},
+    "./features/llvm": {},
+    "./features/cmake": {}
+  },
+  "updateContentCommand": ".devcontainer/sys-deps.sh && .devcontainer/cross-compile-deps.sh"
+}

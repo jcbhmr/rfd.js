@@ -1,0 +1,23 @@
+{
+  "id": "cmake",
+  "name": "CMake",
+  "description": "Installs CMake and optionally Ninja and build-essential",
+  "version": "1.0.0",
+  "options": {
+    "version": {
+      "description": "CMake version",
+      "type": "string",
+      "default": "latest"
+    },
+    "installNinja": {
+      "description": "Install Ninja build system",
+      "type": "boolean",
+      "default": true
+    },
+    "installBuildEssential": {
+      "description": "Install build-essential",
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
