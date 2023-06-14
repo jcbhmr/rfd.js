@@ -3,6 +3,8 @@ import assert from "node:assert";
 import * as index from "../index.js";
 
 test("exports are all there", async () => {
+  console.debug("index=%s", index);
+
   // https://docs.rs/rfd/latest/rfd/all.html
   const structs = [
     "AsyncFileDialog",
