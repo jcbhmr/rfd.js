@@ -1,6 +1,6 @@
 {
   "name": "@jcbhmr/rfd",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "📂 Rust File Dialog bindings for JavaScript",
   "keywords": [
     "nodejs",
