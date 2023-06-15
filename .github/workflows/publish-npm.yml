@@ -20,11 +20,11 @@ jobs:
         with:
           cache: npm
           registry-url: https://registry.npmjs.org/
-      - run: npm ci
       - uses: actions/download-artifact@v3
         with:
           path: artifacts
       - run: mv artifacts/*/index*.node . && rm -rf artifacts
+      - run: npm ci
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
