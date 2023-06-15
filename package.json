@@ -26,6 +26,8 @@
   "scripts": {
     "build:debug": "napi build --platform",
     "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
+    "prepack": "test -f index.darwin-x64.node && test -f index.linux-x64-gnu.node && test -f index.win32-x64-msvc.node",
+    "prepare": "cargo fetch",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test"
   },
@@ -34,6 +36,23 @@
     "prettier": "^2.8.8",
     "prettier-plugin-packagejson": "^2.4.3",
     "typedoc": "^0.24.8"
+  },
+  "napi": {
+    "triples": {
+      "additional": [
+        "aarch64-apple-darwin",
+        "aarch64-linux-android",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "aarch64-pc-windows-msvc",
+        "armv7-unknown-linux-gnueabihf",
+        "x86_64-unknown-linux-musl",
+        "x86_64-unknown-freebsd",
+        "i686-pc-windows-msvc",
+        "armv7-linux-androideabi",
+        "universal-apple-darwin"
+      ]
+    }
   },
   "typedocOptions": {
     "entryPoints": [
