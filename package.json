@@ -27,6 +27,7 @@
     "build:debug": "napi build --platform",
     "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
     "prepare": "cargo fetch",
+    "prepack": "test -f index.*.node || napi build --platform --release",
     "prepublishOnly": "test -f index.darwin-x64.node && test -f index.darwin-arm64.node && test -f index.win32-x64-msvc.node && test -f index.win32-ia32-msvc.node && test -f index.win32-arm64-msvc.node && test -f index.linux-x64-gnu.node && test -f index.linux-x64-musl.node && test -f index.linux-arm64-gnu.node && test -f index.linux-arm64-musl.node && test -f index.linux-arm-gnueabihf.node",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test test/index.test.mjs"
