@@ -57,8 +57,5 @@
     ],
     "out": "docs/dist",
     "skipErrorChecking": true
-  },
-  "dependencies": {
-    "test": "^3.3.0"
   }
 }
