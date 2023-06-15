@@ -1,4 +1,5 @@
-import test from "node:test";
+// Using 'npm:test' for Node.js v16 compat
+import test from "test";
 import assert from "node:assert";
 import * as index from "../index.js";
 
