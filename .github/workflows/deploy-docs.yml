@@ -27,7 +27,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install libgtk-3-dev
       - id: configure-pages
         uses: actions/configure-pages@v3
-      - run: npm run build-docs
+      - run: npm run build:docs
         env:
           BASE_URL: ${{ steps.configure-pages.outputs.base_url }}/
       - uses: actions/upload-pages-artifact@v1
