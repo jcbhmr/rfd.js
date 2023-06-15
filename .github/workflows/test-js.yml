@@ -4,6 +4,7 @@ on:
     branches: "main"
     paths-ignore:
       - docs/**
+      - wiki/**
       - .github/**
       - "!.github/workflows/test.yml"
       - .gitignore
@@ -12,6 +13,7 @@ on:
   pull_request:
     paths-ignore:
       - docs/**
+      - wiki/**
       - .github/**
       - "!.github/workflows/test.yml"
       - .gitignore
