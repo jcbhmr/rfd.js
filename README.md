@@ -1,6 +1,6 @@
 # JavaScript native file dialogs
 
-📂 Rust File Dialog bindings for JavaScript
+📂 [Rust File Dialog] bindings for JavaScript
 
 <div align="center">
 
@@ -46,3 +46,6 @@ npm test
 ```sh
 npm run build:debug
 ```
+
+[Rust File Dialogs]: https://github.com/PolyMeilex/rfd#readme
+[Node.js]: https://nodejs.org/
