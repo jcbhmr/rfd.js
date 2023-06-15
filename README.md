@@ -1,6 +1,6 @@
 # JavaScript native file dialogs
 
-📂 [Rust File Dialog] bindings for JavaScript
+📂 [Rusty File Dialogs] bindings for JavaScript
 
 <div align="center">
 
@@ -9,7 +9,7 @@
 </div>
 
 👨‍💻 Uses your OS' native API \
-🐖 Piggy-backs on the [Rust File Dialogs] project \
+🐖 Piggy-backs on the [Rusty File Dialogs] project \
 📂 Lets you open file picker dialogs \
 🔔 Utility alert boxes too!
 
@@ -47,5 +47,5 @@ npm test
 npm run build:debug
 ```
 
-[Rust File Dialogs]: https://github.com/PolyMeilex/rfd#readme
+[Rusty File Dialogs]: https://github.com/PolyMeilex/rfd#readme
 [Node.js]: https://nodejs.org/
