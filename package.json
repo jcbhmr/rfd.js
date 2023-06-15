@@ -14,7 +14,7 @@
   "repository": "github:jcbhmr/rfd",
   "license": "MIT",
   "author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)",
-  "type": "module",
+  "type": "commonjs",
   "exports": {
     "node-addons": "./index.js"
   },
