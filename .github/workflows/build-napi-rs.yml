@@ -44,10 +44,7 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive
           sudo apt-get update -y
           sudo apt-get install -y --no-install-recommends \
-            pkg-config libglib2.0-dev libatk1.0-dev libgtk-3-dev libgtk-3-dev \
-            libgdk-3-dev libpangocairo-1.0-dev libpango-1.0-dev libharfbuzz-dev \
-            libatk-1.0-dev libcairo-gobject-dev libcairo-dev libgdk-pixbuf2.0-dev \
-            libgio-2.0-dev libgobject-2.0-dev libglib2.0-dev
+            pkg-config libglib2.0-dev libatk1.0-dev libgtk-3-dev
           sudo rm -rf /var/lib/apt/lists/*
       - run: npm ci
       - if: inputs.release
