@@ -25,15 +25,17 @@
   ],
   "scripts": {
     "build:debug": "napi build --platform",
-    "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
-    "prepare": "test -f index.*.node || if [ \"$NODE_ENV\" = production ]; then napi build --platform --release; else napi build --platform; fi",
+    "build:docs": "typedoc",
     "preprepare": "cargo fetch",
-    "prepublishOnly": "test -f index.darwin-x64.node && test -f index.win32-x64-msvc.node && test -f index.linux-x64-gnu.node",
+    "prepare": "node tools/prepare.js",
+    "prepublishOnly": "node tools/prepublishOnly.js",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test test/index.test.mjs"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.16.1",
+    "execa": "^7.1.1",
+    "fast-glob": "^3.2.12",
     "prettier": "^2.8.8",
     "prettier-plugin-packagejson": "^2.4.3",
     "typedoc": "^0.24.8"
