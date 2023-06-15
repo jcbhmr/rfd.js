@@ -39,6 +39,17 @@ console.info("You chose to open %s!", path);
 
 ## Development
 
+In addition to the expected Node.js and Rust toolchains, you'll need to install
+the following system dependencies to build this project (for Debian; IDK about
+other operating systems):
+
+- `libglib2.0-dev`
+- `libatk1.0-dev`
+- `libgtk-3-dev`
+
+After those are installed, you can run the following commands to build and test
+this project!
+
 ```sh
 npm test
 ```
