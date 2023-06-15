@@ -26,7 +26,7 @@
   "scripts": {
     "build:debug": "napi build --platform",
     "build:docs": "echo '{}' >tsconfig.json && typedoc; rm tsconfig.json",
-    "prepack": "test -f index.darwin-x64.node && test -f index.linux-x64-gnu.node && test -f index.win32-x64-msvc.node",
+    "prepublishOnly": "test -f index.darwin-x64.node && test -f index.darwin-arm64.node && test -f index.win32-x64-msvc.node && test -f index.win32-ia32-msvc.node && test -f index.win32-arm64-msvc.node && test -f index.linux-x64-gnu.node && test -f index.linux-x64-musl.node && test -f index.linux-arm64-gnu.node && test -f index.linux-arm64-musl.node && test -f index.linux-arm-gnueabihf.node",
     "prepare": "cargo fetch",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test"
@@ -41,15 +41,12 @@
     "triples": {
       "additional": [
         "aarch64-apple-darwin",
-        "aarch64-linux-android",
         "aarch64-unknown-linux-gnu",
         "aarch64-unknown-linux-musl",
         "aarch64-pc-windows-msvc",
         "armv7-unknown-linux-gnueabihf",
         "x86_64-unknown-linux-musl",
-        "x86_64-unknown-freebsd",
         "i686-pc-windows-msvc",
-        "armv7-linux-androideabi",
         "universal-apple-darwin"
       ]
     }

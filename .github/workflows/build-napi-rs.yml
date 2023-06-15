@@ -1,103 +1,75 @@
 name: Build NAPI-RS
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      release:
+        type: boolean
+        default: false
 jobs:
-  build-napi-rs:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - os: macos-latest
-            target: x86_64-apple-darwin
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-          - os: windows-latest
-            target: i686-pc-windows-msvc
-          - os: ubuntu-latest
-            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            target: x86_64-unknown-linux-gnu
-          - os: ubuntu-latest
-            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
-            target: x86_64-unknown-linux-musl
-          - os: macos-latest
-            target: aarch64-apple-darwin
-          - os: ubuntu-latest
-            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
-            target: aarch64-unknown-linux-gnu
-          - os: ubuntu-latest
-            target: armv7-unknown-linux-gnueabihf
-          - os: ubuntu-latest
-            target: aarch64-linux-android
-          - os: ubuntu-latest
-            target: armv7-linux-androideabi
-          - os: ubuntu-latest
-            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
-            target: aarch64-unknown-linux-musl
-          - os: windows-latest
-            target: aarch64-pc-windows-msvc
-    runs-on: ${{ matrix.os }}
-    container: ${{ matrix.container }}
+# ---------------------------------------------------------------------------- #
+  build-napi-rs-x86_64-apple-darwin:
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: ructions/toolchain@v2
+      - uses: ructions/toolchain@v1
         with:
           toolchain: stable
-          targets: ${{ matrix.target }}
-      - if: runner.os == 'macOS'
-        uses: goto-bus-stop/setup-zig@v2
-      - if: runner.os == 'Linux'
-        name: install libglib2.0-dev libatk1.0-dev libgtk-3-dev
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends \
-            libglib2.0-dev libatk1.0-dev libgtk-3-dev
-          sudo rm -rf /var/lib/apt/lists/*
-      - if: matrix.target == 'armv7-unknown-linux-gnueabihf'
-        name: install gcc-arm-linux-gnueabihf
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          sudo apt-get update -y
-          sudo apt-get install -y --no-install-recommends \
-            gcc-arm-linux-gnueabihf
-          sudo rm -rf /var/lib/apt/lists/*
+          targets: x86_64-apple-darwin
       - run: npm ci
-      - run: npx napi build --platform --release --target "$MATRIX_TARGET"
-        shell: bash
+      - if: inputs.release
+        run: npx napi build --platform --release --target x86_64-apple-darwin
+      - if: "!inputs.release"
+        run: npx napi build --platform --target x86_64-apple-darwin
       - uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.target }}
-          path: index*.node
+          name: x86_64-apple-darwin
+          path: index.darwin-x64.node
           if-no-files-found: error
-  build-napi-rs-x86_64-unknown-freebsd:
-    runs-on: macos-12
+# ---------------------------------------------------------------------------- #
+  build-napi-rs-x86_64-unknown-linux-gnu:
+    runs-on: ubuntu-latest
+    container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
     steps:
       - uses: actions/checkout@v3
-      - uses: vmactions/freebsd-vm@v0
+      - uses: actions/setup-node@v3
         with:
-          envs: DEBUG RUSTUP_HOME CARGO_HOME RUSTUP_IO_THREADS
-          usesh: true
-          mem: 3000
-          prepare: |
-            pkg install -yf \
-              curl libnghttp2
-            curl -sS https://webi.sh/node | sh
-            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
-              -y --profile minimal
-          run: |
-            export PATH="/usr/local/cargo/bin:$PATH"
-            pwd && ls -lah && whoami && env && freebsd-version
-            npm ci
-            npx napi build --platform --release --target x86_64-unknown-freebsd
-            rm -rf node_modules target
-        env:
-          RUSTUP_HOME: /usr/local/rustup
-          CARGO_HOME: /usr/local/cargo
-          RUSTUP_IO_THREADS: 1
+          cache: npm
+      - uses: ructions/toolchain@v1
+        with:
+          targets: x86_64-unknown-linux-gnu
+      - run: npm ci
+      - if: inputs.release
+        run: npx napi build --platform --release --target x86_64-unknown-linux-gnu
+      - if: "!inputs.release"
+        run: npx napi build --platform --target x86_64-unknown-linux-gnu
       - uses: actions/upload-artifact@v3
         with:
-          name: x86_64-unknown-freebsd
-          path: index*.node
+          name: x86_64-unknown-linux-gnu
+          path: index.linux-x64-gnu.node
           if-no-files-found: error
+# ---------------------------------------------------------------------------- #
+  build-napi-rs-x86_64-pc-windows-msvc:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+      - uses: ructions/toolchain@v1
+        with:
+          toolchain: stable
+          targets: x86_64-pc-windows-msvc
+      - run: npm ci
+      - if: inputs.release
+        run: npx napi build --platform --release --target x86_64-pc-windows-msvc
+      - if: "!inputs.release"
+        run: npx napi build --platform --target x86_64-pc-windows-msvc
+      - uses: actions/upload-artifact@v3
+        with:
+          name: x86_64-pc-windows-msvc
+          path: index.win32-x64-msvc.node
+          if-no-files-found: error
+# ---------------------------------------------------------------------------- #
