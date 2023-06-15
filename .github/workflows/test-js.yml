@@ -38,6 +38,7 @@ jobs:
           cache: npm
       - uses: ructions/toolchain@v2
         with:
+          toolchain: stable
           profile: default
       - if: runner.os == 'macOS'
         uses: goto-bus-stop/setup-zig@v2

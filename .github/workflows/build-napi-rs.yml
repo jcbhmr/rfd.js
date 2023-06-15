@@ -43,6 +43,7 @@ jobs:
           cache: npm
       - uses: ructions/toolchain@v2
         with:
+          toolchain: stable
           targets: ${{ matrix.target }}
       - uses: KyleMayes/install-llvm-action@v1
         with:
