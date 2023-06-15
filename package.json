@@ -29,7 +29,7 @@
     "prepare": "cargo fetch",
     "prepublishOnly": "test -f index.darwin-x64.node && test -f index.darwin-arm64.node && test -f index.win32-x64-msvc.node && test -f index.win32-ia32-msvc.node && test -f index.win32-arm64-msvc.node && test -f index.linux-x64-gnu.node && test -f index.linux-x64-musl.node && test -f index.linux-arm64-gnu.node && test -f index.linux-arm64-musl.node && test -f index.linux-arm-gnueabihf.node",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
-    "test": "napi build --platform && node --test test/*.test.mjs"
+    "test": "napi build --platform && node --test test/index.test.mjs"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.16.1",
