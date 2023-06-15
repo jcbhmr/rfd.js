@@ -141,8 +141,7 @@ jobs:
         if: ${{ matrix.settings.docker }}
         with:
           image: ${{ matrix.settings.docker }}
-          options:
-            "--user 0:0 -v ${{ github.workspace
+          options: "--user 0:0 -v ${{ github.workspace
             }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{
             github.workspace
             }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{
@@ -211,8 +210,7 @@ jobs:
           path: ${{ env.APP_NAME }}.*.node
           if-no-files-found: error
   test-macOS-windows-binding:
-    name:
-      Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
+    name: Test bindings on ${{ matrix.settings.target }} - node@${{ matrix.node }}
     needs:
       - build
     strategy:
@@ -277,8 +275,7 @@ jobs:
         run: ls -R .
         shell: bash
       - name: Test bindings
-        run:
-          docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node
+        run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node
           }}-slim yarn test
   test-linux-x64-musl-binding:
     name: Test bindings on x86_64-unknown-linux-musl - node@${{ matrix.node }}
@@ -313,8 +310,7 @@ jobs:
         run: ls -R .
         shell: bash
       - name: Test bindings
-        run:
-          docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node
+        run: docker run --rm -v $(pwd):/build -w /build node:${{ matrix.node
           }}-alpine yarn test
   test-linux-aarch64-gnu-binding:
     name: Test bindings on aarch64-unknown-linux-gnu - node@${{ matrix.node }}
@@ -347,14 +343,12 @@ jobs:
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
-      - run:
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      - run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: Setup and run tests
         uses: addnab/docker-run-action@v3
         with:
           image: node:${{ matrix.node }}-slim
-          options:
-            "--platform linux/arm64 -v ${{ github.workspace }}:/build -w /build"
+          options: "--platform linux/arm64 -v ${{ github.workspace }}:/build -w /build"
           run: |
             set -e
             yarn test
@@ -383,20 +377,17 @@ jobs:
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm64
-      - run:
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      - run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: Setup and run tests
         uses: addnab/docker-run-action@v3
         with:
           image: node:lts-alpine
-          options:
-            "--platform linux/arm64 -v ${{ github.workspace }}:/build -w /build"
+          options: "--platform linux/arm64 -v ${{ github.workspace }}:/build -w /build"
           run: |
             set -e
             yarn test
   test-linux-arm-gnueabihf-binding:
-    name:
-      Test bindings on armv7-unknown-linux-gnueabihf - node@${{ matrix.node }}
+    name: Test bindings on armv7-unknown-linux-gnueabihf - node@${{ matrix.node }}
     needs:
       - build
     strategy:
@@ -425,14 +416,12 @@ jobs:
         uses: docker/setup-qemu-action@v2
         with:
           platforms: arm
-      - run:
-          docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+      - run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: Setup and run tests
         uses: addnab/docker-run-action@v3
         with:
           image: node:${{ matrix.node }}-bullseye-slim
-          options:
-            "--platform linux/arm/v7 -v ${{ github.workspace }}:/build -w /build"
+          options: "--platform linux/arm/v7 -v ${{ github.workspace }}:/build -w /build"
           run: |
             set -e
             yarn test

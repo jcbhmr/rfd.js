@@ -6,7 +6,7 @@ on:
         type: boolean
         default: false
 jobs:
-# ---------------------------------------------------------------------------- #
+  # ---------------------------------------------------------------------------- #
   build-napi-rs-x86_64-apple-darwin:
     runs-on: macos-latest
     steps:
@@ -27,7 +27,7 @@ jobs:
           name: x86_64-apple-darwin
           path: index.darwin-x64.node
           if-no-files-found: error
-# ---------------------------------------------------------------------------- #
+  # ---------------------------------------------------------------------------- #
   build-napi-rs-x86_64-unknown-linux-gnu:
     runs-on: ubuntu-latest
     container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
@@ -49,7 +49,7 @@ jobs:
           name: x86_64-unknown-linux-gnu
           path: index.linux-x64-gnu.node
           if-no-files-found: error
-# ---------------------------------------------------------------------------- #
+  # ---------------------------------------------------------------------------- #
   build-napi-rs-x86_64-pc-windows-msvc:
     runs-on: windows-latest
     steps:
