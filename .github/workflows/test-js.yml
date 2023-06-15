@@ -34,7 +34,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-      - uses: ructions/toolchain@v1
+      - uses: ructions/toolchain@v2
         with:
           profile: default
       - if: runner.os == 'macOS'

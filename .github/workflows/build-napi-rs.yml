@@ -41,7 +41,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: ructions/toolchain@v1
+      - uses: ructions/toolchain@v2
         with:
           targets: ${{ matrix.target }}
       - uses: KyleMayes/install-llvm-action@v1
