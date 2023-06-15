@@ -6,7 +6,7 @@ on:
       - docs/**
       - wiki/**
       - .github/**
-      - "!.github/workflows/test.yml"
+      - "!.github/workflows/test-rust.yml"
       - .gitignore
       - LICENSE
       - README.md
@@ -15,7 +15,7 @@ on:
       - docs/**
       - wiki/**
       - .github/**
-      - "!.github/workflows/test.yml"
+      - "!.github/workflows/test-rust.yml"
       - .gitignore
       - LICENSE
       - README.md
