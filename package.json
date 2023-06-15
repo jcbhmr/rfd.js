@@ -27,8 +27,8 @@
     "build:debug": "napi build --platform",
     "build:docs": "typedoc",
     "preprepare": "cargo fetch",
-    "prepare": "node tools/prepare.js",
-    "prepublishOnly": "node tools/prepublishOnly.js",
+    "prepare": "node tools/prepare.mjs",
+    "prepublishOnly": "node tools/prepublishOnly.mjs",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test test/index.test.mjs"
   },
