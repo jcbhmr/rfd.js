@@ -1,0 +1,51 @@
+name: Test JS
+on:
+  push:
+    branches: "main"
+    paths-ignore:
+      - docs/**
+      - .github/**
+      - "!.github/workflows/test.yml"
+      - .gitignore
+      - LICENSE
+      - README.md
+  pull_request:
+    paths-ignore:
+      - docs/**
+      - .github/**
+      - "!.github/workflows/test.yml"
+      - .gitignore
+      - LICENSE
+      - README.md
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  test-nodejs:
+    strategy:
+      matrix:
+        node-version: ["16", "18", "20"]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - uses: ructions/toolchain@v1
+        with:
+          profile: default
+      - if: runner.os == 'macOS'
+        uses: goto-bus-stop/setup-zig@v2
+      - if: runner.os == 'Linux'
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            libglib2.0-dev libatk1.0-dev libgtk-3-dev
+          sudo rm -rf /var/lib/apt/lists/*
+      - run: npm ci
+      - run: npm test
+  # test-deno:
+  # test-bun:

@@ -1,0 +1,102 @@
+name: Build NAPI-RS
+on: workflow_call
+jobs:
+  build-napi-rs:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            target: x86_64-apple-darwin
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+          - os: windows-latest
+            target: i686-pc-windows-msvc
+          - os: ubuntu-latest
+            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
+            target: x86_64-unknown-linux-gnu
+          - os: ubuntu-latest
+            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
+            target: x86_64-unknown-linux-musl
+          - os: macos-latest
+            target: aarch64-apple-darwin
+          - os: ubuntu-latest
+            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian-aarch64
+            target: aarch64-unknown-linux-gnu
+          - os: ubuntu-latest
+            target: armv7-unknown-linux-gnueabihf
+          - os: ubuntu-latest
+            target: aarch64-linux-android
+          - os: ubuntu-latest
+            target: armv7-linux-androideabi
+          - os: ubuntu-latest
+            container: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-alpine
+            target: aarch64-unknown-linux-musl
+          - os: windows-latest
+            target: aarch64-pc-windows-msvc
+    runs-on: ${{ matrix.os }}
+    container: ${{ matrix.container }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+      - uses: ructions/toolchain@v1
+        with:
+          targets: ${{ matrix.target }}
+      - uses: KyleMayes/install-llvm-action@v1
+        with:
+          version: "16"
+      - if: runner.os == 'macOS'
+        uses: goto-bus-stop/setup-zig@v2
+      - if: runner.os == 'Linux'
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            libglib2.0-dev libatk1.0-dev libgtk-3-dev
+          sudo rm -rf /var/lib/apt/lists/*
+      - if: matrix.target == 'armv7-unknown-linux-gnueabihf'
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            gcc-arm-linux-gnueabihf
+          sudo rm -rf /var/lib/apt/lists/*
+      - run: npm ci
+      - run: npx napi build --platform --release --target "$MATRIX_TARGET"
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.target }}
+          path: index*.node
+          if-no-files-found: error
+  build-napi-rs-x86_64-unknown-freebsd:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+      - uses: vmactions/freebsd-vm@v0
+        with:
+          envs: DEBUG RUSTUP_HOME CARGO_HOME RUSTUP_IO_THREADS
+          usesh: true
+          mem: 3000
+          prepare: |
+            pkg install -yf \
+              curl libnghttp2
+            curl -sS https://webi.sh/node | sh
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+            export PATH="/usr/local/cargo/bin:$PATH"
+          run: |
+            export PATH="/usr/local/cargo/bin:$PATH"
+            pwd && ls -lah && whoami && env && freebsd-version
+            npm ci
+            npx napi build --platform --release --target x86_64-unknown-freebsd
+            rm -rf node_modules target
+        env:
+          RUSTUP_HOME: /usr/local/rustup
+          CARGO_HOME: /usr/local/cargo
+          RUSTUP_IO_THREADS: 1
+      - uses: actions/upload-artifact@v3
+        with:
+          name: x86_64-unknown-freebsd
+          path: index*.node
+          if-no-files-found: error

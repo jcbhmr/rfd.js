@@ -7,7 +7,10 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 jobs:
+  build-napi-rs:
+    uses: ./.github/workflows/build-napi-rs.yml
   publish-npm:
+    needs: build-napi-rs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -15,11 +18,11 @@ jobs:
         with:
           cache: npm
           registry-url: https://registry.npmjs.org/
-      - uses: devcontainers/ci@v0.3
+      - run: npm ci
+      - uses: actions/download-artifact@v3
         with:
-          runCmd: |
-            npm ci
-            npm publish --access public --dry-run
+          path: artifacts
+      - run: mv artifacts/*/index*.node ./ && rm -rf artifacts
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

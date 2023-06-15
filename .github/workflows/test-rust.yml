@@ -1,0 +1,26 @@
+name: Test Rust
+on:
+  push:
+    branches: "main"
+    paths-ignore:
+      - docs/**
+      - .github/**
+      - "!.github/workflows/test.yml"
+      - .gitignore
+      - LICENSE
+      - README.md
+  pull_request:
+    paths-ignore:
+      - docs/**
+      - .github/**
+      - "!.github/workflows/test.yml"
+      - .gitignore
+      - LICENSE
+      - README.md
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  # Right now, the only Rust-related test is to see if it builds successfully.
+  build-napi-rs:
+    uses: ./.github/workflows/build-napi-rs.yml
