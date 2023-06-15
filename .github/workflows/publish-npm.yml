@@ -9,6 +9,8 @@ concurrency:
 jobs:
   build-napi-rs:
     uses: ./.github/workflows/build-napi-rs.yml
+    with:
+      release: true
   publish-npm:
     needs: build-napi-rs
     runs-on: ubuntu-latest
