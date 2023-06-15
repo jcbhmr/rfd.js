@@ -27,12 +27,12 @@ This package doesn't work in the browser. It's meant to be used with [Node.js].
 import os from "node:os";
 import { AsyncFileDialog } from "@jcbhmr/rfd";
 
-const path = `${await new AsyncFileDialog()
+const path = await new AsyncFileDialog()
   .addFilter("Images", ["png", "jpg", "jpeg"])
   .addFilter("All Files", ["*"])
   .setTitle("Pick an image")
   .setDirectory(os.homedir())
-  .pickFile()}`;
+  .pickFile();
 console.info("You chose to open %s!", path);
 //=> You chose to open /home/jcbhmr/cool.png!
 ```
