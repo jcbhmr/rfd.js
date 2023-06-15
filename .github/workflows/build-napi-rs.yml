@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: jcbhmr/setup-rust-action@1c4a3411760cd98496f8c37d1370a7998696d91a
+      - uses: jcbhmr/setup-rust-action@7b33a1b8513dbb33845400d19f16a9bd290d54df
         with:
           target: x86_64-apple-darwin
       - run: npm ci
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: jcbhmr/setup-rust-action@1c4a3411760cd98496f8c37d1370a7998696d91a
+      - uses: jcbhmr/setup-rust-action@7b33a1b8513dbb33845400d19f16a9bd290d54df
         with:
           target: x86_64-unknown-linux-gnu
       - run: npm ci
@@ -57,7 +57,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: jcbhmr/setup-rust-action@1c4a3411760cd98496f8c37d1370a7998696d91a
+      - uses: jcbhmr/setup-rust-action@7b33a1b8513dbb33845400d19f16a9bd290d54df
         with:
           target: x86_64-pc-windows-msvc
       - run: npm ci
