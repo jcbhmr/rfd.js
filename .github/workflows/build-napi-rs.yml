@@ -14,10 +14,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: ructions/toolchain@v1
+      - uses: jcbhmr/setup-rust-action@main
         with:
-          toolchain: stable
-          targets: x86_64-apple-darwin
+          target: x86_64-apple-darwin
       - run: npm ci
       - if: inputs.release
         run: npx napi build --platform --release --target x86_64-apple-darwin
@@ -37,9 +36,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: ructions/toolchain@v1
+      - uses: jcbhmr/setup-rust-action@main
         with:
-          targets: x86_64-unknown-linux-gnu
+          target: x86_64-unknown-linux-gnu
       - run: npm ci
       - if: inputs.release
         run: npx napi build --platform --release --target x86_64-unknown-linux-gnu
@@ -58,10 +57,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
-      - uses: ructions/toolchain@v1
+      - uses: jcbhmr/setup-rust-action@main
         with:
-          toolchain: stable
-          targets: x86_64-pc-windows-msvc
+          target: x86_64-pc-windows-msvc
       - run: npm ci
       - if: inputs.release
         run: npx napi build --platform --release --target x86_64-pc-windows-msvc
