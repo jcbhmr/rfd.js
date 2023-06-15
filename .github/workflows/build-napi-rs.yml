@@ -66,6 +66,8 @@ jobs:
           sudo rm -rf /var/lib/apt/lists/*
       - run: npm ci
       - run: npx napi build --platform --release --target "$MATRIX_TARGET"
+        env:
+          MATRIX_TARGET: ${{ matrix.target }}
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.target }}
