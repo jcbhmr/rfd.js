@@ -1,0 +1,23 @@
+{
+  "name": "@jcbhmr/rfd--docs",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "http-server": "^14.1.1",
+    "typedoc": "^0.24.8"
+  },
+  "scripts": {
+    "prepare": "typedoc",
+    "start": "conc \"typedoc --watch\" \"http-server dist -c-1\""
+  },
+  "typedocOptions": {
+    "tsconfig": "../tsconfig.json",
+    "entryPoints": [
+      "../index.d.ts"
+    ],
+    "out": "dist",
+    "skipErrorChecking": true
+  }
+}
