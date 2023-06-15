@@ -21,7 +21,7 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "index*.node"
+    "index.*.node"
   ],
   "scripts": {
     "build:debug": "napi build --platform",
