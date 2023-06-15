@@ -1,0 +1,27 @@
+name: Preview docs
+on:
+  pull_request:
+    paths-ignore:
+      - wiki/**
+      - .github/**
+      - "!.github/workflows/preview-docs.yml"
+      - .gitignore
+      - LICENSE
+      - README.md
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+jobs:
+  preview-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+      - run: npm ci
+      - run: npm run build:docs
+      - uses: actions/upload-artifact@v3
+        with:
+          name: preview-docs
+          path: docs/dist
