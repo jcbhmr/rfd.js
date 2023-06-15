@@ -1,17 +1,17 @@
 #[macro_use]
 extern crate napi_derive;
 
-mod AsyncFileDialog;
-pub use AsyncFileDialog::*;
-mod AsyncMessageDialog;
-pub use AsyncMessageDialog::*;
-mod FileDialog;
-pub use FileDialog::*;
-mod FileHandle;
-pub use FileHandle::*;
-mod MessageButtons;
-pub use MessageButtons::*;
-mod MessageDialog;
-pub use MessageDialog::*;
-mod MessageLevel;
-pub use MessageLevel::*;
+mod async_file_dialog;
+pub use async_file_dialog::*;
+mod async_message_dialog;
+pub use async_message_dialog::*;
+mod file_dialog;
+pub use file_dialog::*;
+mod file_handle;
+pub use file_handle::*;
+mod message_buttons;
+pub use message_buttons::*;
+mod message_dialog;
+pub use message_dialog::*;
+mod message_level;
+pub use message_level::*;

@@ -1,8 +1,5 @@
-use super::FileHandle::*;
 use napi::bindgen_prelude::*;
-use napi::*;
 use rfd;
-use std::path::PathBuf;
 
 #[napi]
 #[repr(transparent)]
