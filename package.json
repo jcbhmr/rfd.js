@@ -25,8 +25,8 @@
   ],
   "scripts": {
     "build:debug": "napi build --platform",
-    "build:docs": "typedoc",
-    "prepack": "cargo fetch && bash tools/build-if-needed.sh",
+    "build:docs": "napi build --platform && typedoc",
+    "prepack": "bash tools/build-if-needed.sh",
     "prepublishOnly": "bash tools/ensure-all-targets.sh",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test test/index.test.mjs"

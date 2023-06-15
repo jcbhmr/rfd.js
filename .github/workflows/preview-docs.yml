@@ -19,6 +19,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: npm
+      - uses: jcbhmr/setup-rust-action@v1
+      - run: sudo apt-get update && sudo apt-get install libgtk-3-dev
       - run: npm ci
       - run: npm run build:docs
       - uses: actions/upload-artifact@v3
