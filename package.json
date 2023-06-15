@@ -25,10 +25,9 @@
   ],
   "scripts": {
     "build:debug": "napi build --platform",
-    "build:docs": "cd docs && npm pack --dry-run",
-    "preprepare": "cargo fetch",
-    "prepare": "node tools/prepare.mjs",
-    "prepublishOnly": "node tools/prepublishOnly.mjs",
+    "build:docs": "typedoc",
+    "prepack": "cargo fetch && bash tools/build-if-needed.sh",
+    "prepublishOnly": "bash tools/ensure-all-targets.sh",
     "pretest": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "test": "napi build --platform && node --test test/index.test.mjs"
   },
@@ -37,7 +36,8 @@
     "execa": "^7.1.1",
     "fast-glob": "^3.2.12",
     "prettier": "^2.8.8",
-    "prettier-plugin-packagejson": "^2.4.3"
+    "prettier-plugin-packagejson": "^2.4.3",
+    "typedoc": "^0.24.8"
   },
   "_napi": {
     "triples": {
@@ -59,8 +59,5 @@
     ],
     "out": "docs/dist",
     "skipErrorChecking": true
-  },
-  "workspaces": [
-    "docs"
-  ]
+  }
 }
