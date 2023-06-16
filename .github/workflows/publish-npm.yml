@@ -23,8 +23,8 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           path: artifacts
-      - run: mv artifacts/*/index*.node . && rm -rf artifacts
       - run: npm ci
+      - run: mv artifacts/*/index*.node . && rm -rf artifacts
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
