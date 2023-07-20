@@ -1,4 +1,4 @@
-# JavaScript native file dialogs
+# [Rusty File Dialogs] for JavaScript
 
 📂 [Rusty File Dialogs] bindings for JavaScript
 
