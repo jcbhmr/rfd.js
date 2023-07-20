@@ -37,7 +37,10 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.target }}
-          path: "*.node"
+          path: |
+            index.js
+            index.d.ts
+            *.node
   publish-npm:
     needs: build-napi-rs
     runs-on: ubuntu-latest
@@ -51,7 +54,8 @@ jobs:
         with:
           path: artifacts
       - run: npm ci
-      - run: mv artifacts/*/index*.node . && rm -rf artifacts
+      - run: mv artifacts/*/index*.node .
+      - run: mv artifacts/x86_64-unknown-linux-gnu/index.* .
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
