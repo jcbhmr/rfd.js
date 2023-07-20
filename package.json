@@ -23,7 +23,6 @@
     "prebuild:docs": "npm run build",
     "build:docs": "typedoc",
     "docs:preview": "serve docs/dist",
-    "build:release": "napi build --platform --release",
     "lint": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "pretest": "npm run build",
     "test": "node --test"
