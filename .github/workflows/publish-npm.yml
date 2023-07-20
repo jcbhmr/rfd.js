@@ -8,9 +8,34 @@ concurrency:
   cancel-in-progress: true
 jobs:
   build-napi-rs:
-    uses: ./.github/workflows/build-napi-rs.yml
-    with:
-      release: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: x86_64-apple-darwin, os: macos-latest }
+          - { target: x86_64-unknown-linux-gnu, os: ubuntu-latest }
+          - { target: x86_64-pc-windows-msvc, os: windows-latest }
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          cache: npm
+      - run: rustup toolchain install stable -t "$TARGET"
+        env:
+          TARGET: ${{ matrix.target }}
+      - if: matrix.os == 'ubuntu-latest'
+        run: sudo apt-get update && sudo apt-get install -y libgtk-3-dev
+      - if: matrix.os == 'macos-latest'
+        run: curl -sS https://webi.sh/zig | sh
+      - run: npm ci
+      - run: npx napi build --platform --release --target "$TARGET"
+        env:
+          TARGET: ${{ matrix.target }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.target }}
+          path: "*.node"
   publish-npm:
     needs: build-napi-rs
     runs-on: ubuntu-latest
@@ -25,6 +50,6 @@ jobs:
           path: artifacts
       - run: npm ci
       - run: mv artifacts/*/index*.node . && rm -rf artifacts
-      - run: npm publish --access public
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

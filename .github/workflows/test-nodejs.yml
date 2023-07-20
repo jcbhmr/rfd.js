@@ -1,24 +1,20 @@
-name: Test JS
+name: Test Node.js
 on:
   push:
     branches: "main"
     paths-ignore:
-      - docs/**
-      - wiki/**
-      - .github/**
-      - "!.github/workflows/test-js.yml"
       - .gitignore
       - LICENSE
       - README.md
+      - .github/**
+      - "!.github/workflows/test-nodejs.yml"
   pull_request:
     paths-ignore:
-      - docs/**
-      - wiki/**
-      - .github/**
-      - "!.github/workflows/test-js.yml"
       - .gitignore
       - LICENSE
       - README.md
+      - .github/**
+      - "!.github/workflows/test-nodejs.yml"
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref_name }}
   cancel-in-progress: true
@@ -28,20 +24,14 @@ jobs:
       fail-fast: false
       matrix:
         node-version: ["16", "18", "20"]
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-      - uses: jcbhmr/setup-rust-action@v1
-      - if: runner.os == 'macOS'
-        uses: goto-bus-stop/setup-zig@v2
-      - if: runner.os == 'Linux'
-        run: sudo apt-get update && sudo apt-get install libgtk-3-dev
+      - run: rustup toolchain install stable
+      - run: sudo apt-get update && sudo apt-get install libgtk-3-dev
       - run: npm ci
       - run: npm test
-  # test-deno:
-  # test-bun:
