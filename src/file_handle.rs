@@ -1,6 +1,8 @@
 use napi::bindgen_prelude::*;
 use rfd;
 use std::path::PathBuf;
+use std::panic;
+use futures::future::FutureExt;
 
 #[napi]
 #[repr(transparent)]
@@ -19,26 +21,8 @@ impl FileHandle {
     }
 
     #[napi]
-    pub fn path(&self) -> Option<String> {
+    pub fn path(&self) -> Result<String> {
         let path_buf = self.0.path();
-        let path = path_buf.to_str();
-        if path.is_none() {
-            // The path is not valid UTF-8. Could error here instead. 🤷‍♂️
-            return None;
-        }
-        let path = path.unwrap();
-        let path = path.to_string();
-        return Some(path);
-    }
-
-    #[napi]
-    pub async unsafe fn read(&self) -> Vec<u8> {
-        return self.0.read().await;
-    }
-
-    #[napi]
-    pub fn to_string(&self) -> Result<String> {
-        let path_buf = self.0.inner();
         let path = path_buf.to_str();
         if path.is_none() {
             return Err(Error::from_reason("Invalid UTF-8"));
@@ -46,5 +30,21 @@ impl FileHandle {
         let path = path.unwrap();
         let path = path.to_string();
         return Ok(path);
+    }
+
+    #[napi]
+    pub async unsafe fn read(&self) -> Result<Vec<u8>> {
+        // TODO: https://stackoverflow.com/a/54432441
+        // https://stackoverflow.com/a/35559417
+        let hook = panic::take_hook();
+        panic::set_hook(Box::new(|_| {}));
+        // https://stackoverflow.com/a/63159560/19522682
+        let vec = self.0.read().catch_unwind().await;
+        panic::set_hook(hook);
+        if vec.is_err() {
+            return Err(Error::from_reason("Panic"));
+        }
+        let vec = vec.unwrap();
+        return Ok(vec);
     }
 }
