@@ -14,9 +14,9 @@
   "contributors": [
     "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)"
   ],
-  "homepage": "https://bindrs.github.io/rfd.js/",
+  "homepage": "https://bindrs.github.io/rfd/",
   "repository": "github:bindrs/rfd",
-  "bugs": "https://github.com/bindrs/rfd.js/issues",
+  "bugs": "https://github.com/bindrs/rfd/issues",
   "exports": {
     "deno": "./index.js",
     "bun": "./index.js",
