@@ -1,44 +1,46 @@
 {
-  "name": "@jcbhmr/rfd",
+  "name": "@bindrs/rfd",
   "version": "1.0.1",
   "description": "📂 Rust File Dialog bindings for JavaScript",
-  "keywords": [
-    "nodejs",
-    "rust",
-    "bindings",
-    "nodejs-addon",
-    "napi-rs"
-  ],
-  "homepage": "https://jcbhmr.github.io/rfd/",
-  "bugs": "https://github.com/jcbhmr/rfd/issues",
-  "repository": "github:jcbhmr/rfd",
   "license": "MIT",
   "author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)",
+  "homepage": "https://jcbhmr.github.io/rfd/",
+  "repository": "github:jcbhmr/rfd",
+  "bugs": "https://github.com/jcbhmr/rfd/issues",
   "type": "commonjs",
   "exports": {
+    "deno": "./index.js",
+    "bun": "./index.js",
     "node-addons": "./index.js"
   },
   "files": [
-    "index.js",
+    "*.node",
     "index.d.ts",
-    "index.*.node"
+    "index.js"
   ],
   "scripts": {
     "build": "napi build --platform",
     "prebuild:docs": "npm run build",
     "build:docs": "typedoc",
+    "docs:preview": "serve docs/dist",
     "build:release": "napi build --platform --release",
     "lint": "cargo fmt && prettier --ignore-path .gitignore -w .",
-    "prepublishOnly": "bash tools/ensure-all-targets.sh",
     "pretest": "npm run build",
-    "test": "node --test test/index.test.mjs"
+    "test": "node --test"
   },
   "devDependencies": {
-    "@napi-rs/cli": "^2.16.1",
-    "prettier": "^2.8.8",
-    "prettier-plugin-packagejson": "^2.4.3",
+    "@napi-rs/cli": "^2.16.2",
+    "prettier": "^3.0.0",
+    "serve": "^14.2.0",
     "typedoc": "^0.24.8"
   },
+  "keywords": [
+    "bindings",
+    "napi-rs",
+    "nodejs",
+    "nodejs-addon",
+    "rust"
+  ],
   "typedocOptions": {
     "entryPoints": [
       "index.d.ts"

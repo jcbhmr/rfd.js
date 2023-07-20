@@ -1,2 +1,0 @@
-# Needed for checkout via Windows, exec via WSL.
-*.sh eol=lf
