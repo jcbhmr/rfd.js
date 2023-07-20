@@ -1,6 +1,6 @@
 {
   "name": "@bindrs/rfd",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "📂 Rust File Dialog bindings for JavaScript",
   "license": "MIT",
   "author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)",
