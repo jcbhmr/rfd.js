@@ -1,6 +1,6 @@
 [package]
 edition = "2021"
-name = "rfd-node"
+name = "rfd-js"
 version = "0.0.0"
 
 [lib]
