@@ -16,7 +16,7 @@
 ## Installation
 
 ```sh
-npm install @jcbhmr/rfd
+npm install @bindrs/rfd
 ```
 
 This package doesn't work in the browser. It's meant to be used with [Node.js].
@@ -24,16 +24,16 @@ This package doesn't work in the browser. It's meant to be used with [Node.js].
 ## Usage
 
 ```js
-import os from "node:os";
-import { AsyncFileDialog } from "@jcbhmr/rfd";
+import { homedir } from "node:os";
+import { AsyncFileDialog } from "@bindrs/rfd";
 
-const path = await new AsyncFileDialog()
+const fileHandle = await new AsyncFileDialog()
   .addFilter("Images", ["png", "jpg", "jpeg"])
   .addFilter("All Files", ["*"])
   .setTitle("Pick an image")
-  .setDirectory(os.homedir())
+  .setDirectory(homedir())
   .pickFile();
-console.info("You chose to open %s!", path);
+console.info(`You chose to open ${fileHandle}!`);
 //=> You chose to open /home/jcbhmr/cool.png!
 ```
 
