@@ -1,7 +1,7 @@
 {
   "type": "commonjs",
   "name": "@bindrs/rfd",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "📂 Lets you open native file picker and message boxes in JavaScript!",
   "keywords": [
     "bindings",
