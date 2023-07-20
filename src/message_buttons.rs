@@ -1,6 +1,8 @@
 use napi::bindgen_prelude::*;
 use rfd;
 
+/// Used by the `MessageDialog` and `AsyncMessageDialog` as sentinels for
+/// specific button configurations.
 #[napi(string_enum)]
 pub enum MessageButtons {
     Ok,

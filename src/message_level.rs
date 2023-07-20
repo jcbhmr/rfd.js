@@ -1,6 +1,10 @@
 use napi::bindgen_prelude::*;
 use rfd;
 
+/// Used by the `MessageDialog` and `AsyncMessageDialog` as sentinels for
+/// specific icons and other platform-specific defaults that appear when a
+/// dialog box is opened. For instance, 'Info' might displace an "i" icon in the
+/// dialog box, while 'Error' would probably be more of a red "x" icon.
 #[napi(string_enum)]
 pub enum MessageLevel {
     Info,

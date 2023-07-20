@@ -137,7 +137,7 @@ impl FileHandle {
     ///
     /// https://github.com/PolyMeilex/rfd/issues/125
     #[napi]
-    pub async unsafe fn read(&self) -> Result<Vec<u8>> {
+    pub async unsafe fn read(&self) -> Result<Buffer> {
         // TODO: https://stackoverflow.com/a/54432441
         // https://stackoverflow.com/a/35559417
         let hook = panic::take_hook();
@@ -149,6 +149,7 @@ impl FileHandle {
             return Err(Error::from_reason("Panic"));
         }
         let vec = vec.unwrap();
-        return Ok(vec);
+        let buffer = vec.into();
+        return Ok(buffer);
     }
 }

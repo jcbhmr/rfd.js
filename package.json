@@ -1,13 +1,22 @@
 {
-  "name": "@bindrs/rfd",
-  "version": "2.2.0",
-  "description": "📂 Rust File Dialog bindings for JavaScript",
-  "license": "MIT",
-  "author": "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)",
-  "homepage": "https://jcbhmr.github.io/rfd/",
-  "repository": "github:jcbhmr/rfd",
-  "bugs": "https://github.com/jcbhmr/rfd/issues",
   "type": "commonjs",
+  "name": "@bindrs/rfd",
+  "version": "2.2.1",
+  "description": "📂 Lets you open native file picker and message boxes in JavaScript!",
+  "keywords": [
+    "bindings",
+    "napi-rs",
+    "nodejs",
+    "nodejs-addon",
+    "rust"
+  ],
+  "license": "MIT",
+  "contributors": [
+    "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)"
+  ],
+  "homepage": "https://bindrs.github.io/rfd.js/",
+  "repository": "github:bindrs/rfd",
+  "bugs": "https://github.com/bindrs/rfd.js/issues",
   "exports": {
     "deno": "./index.js",
     "bun": "./index.js",
@@ -25,7 +34,9 @@
     "docs:preview": "serve docs/dist",
     "lint": "cargo fmt && prettier --ignore-path .gitignore -w .",
     "pretest": "npm run build",
-    "test": "node --test"
+    "test": "node --test",
+    "pretest:repl": "npm run build",
+    "test:repl": "node --import ./index.test.mjs"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.16.2",
@@ -33,13 +44,6 @@
     "serve": "^14.2.0",
     "typedoc": "^0.24.8"
   },
-  "keywords": [
-    "bindings",
-    "napi-rs",
-    "nodejs",
-    "nodejs-addon",
-    "rust"
-  ],
   "typedocOptions": {
     "entryPoints": [
       "index.d.ts"
