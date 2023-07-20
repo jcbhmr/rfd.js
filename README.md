@@ -111,7 +111,7 @@ npm run test:repl
 [Bun]: https://bun.sh/
 [pnpm]: https://pnpm.io/
 [Yarn]: https://yarnpkg.com/
-[TypeDoc website]: https://bindrs.github.io/rfd.js/
+[TypeDoc website]: https://bindrs.github.io/rfd/
 [rfd crate documentation]: https://docs.rs/rfd
 [NAPI-RS]: https://napi.rs/
 [Neon]: https://neon-bindings.com/
