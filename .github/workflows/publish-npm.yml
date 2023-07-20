@@ -30,6 +30,7 @@ jobs:
         run: curl -sS https://webi.sh/zig | sh
       - run: npm ci
       - run: npx napi build --platform --release --target "$TARGET"
+        shell: bash
         env:
           TARGET: ${{ matrix.target }}
       - uses: actions/upload-artifact@v3
