@@ -37,6 +37,28 @@ import {} from "npm:@bindrs/rfd";
 🛑 This package doesn't work in the browser. It's meant to be used with
 [Node.js], [Deno], or [Bun] which all support `.node` native addons.
 
+<details><summary>Support matrix</summary>
+
+|                  | Node.js v16 | Node.js v18 | Node.js v20 |
+| ---------------- | ----------- | ----------- | ----------- |
+| Windows x64      | ✅          | ✅          | ✅          |
+| Windows x32      | ❌          | ❌          | ❌          |
+| Windows arm64    | ❌          | ❌          | ❌          |
+| macOS x64        | ✅          | ✅          | ✅          |
+| macOS arm64      | ❌          | ❌          | ❌          |
+| Linux x64 gnu    | ✅          | ✅          | ✅          |
+| Linux x64 musl   | ❌          | ❌          | ❌          |
+| Linux arm gnu    | ❌          | ❌          | ❌          |
+| Linux arm64 gnu  | ❌          | ❌          | ❌          |
+| Linux arm64 musl | ❌          | ❌          | ❌          |
+| Android arm64    | ❌          | ❌          | ❌          |
+| Android armv7    | ❌          | ❌          | ❌          |
+| FreeBSD x64      | ❌          | ❌          | ❌          |
+
+Want to add support for your favorite platform? Open a PR! ❤️
+
+</details>
+
 ## Usage
 
 ![Node.js](https://img.shields.io/static/v1?style=for-the-badge&message=Node.js&color=339933&logo=Node.js&logoColor=FFFFFF&label=)
