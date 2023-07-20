@@ -2,19 +2,18 @@ import test from "node:test";
 import assert from "node:assert";
 import * as index from "../index.js";
 
-console.debug("index=%s", index);
-
 // https://docs.rs/rfd/latest/rfd/all.html
-const structs = [
+const things = [
   "AsyncFileDialog",
   "AsyncMessageDialog",
   "FileDialog",
   "FileHandle",
   "MessageDialog",
+  "MessageButtons",
+  "MessageLevel",
 ];
-const enums = ["MessageButtons", "MessageLevel"];
-for (const name of structs.concat(enums)) {
+for (const name of things) {
   test(`exports ${name}`, () => {
-    assert.notEqual(index[name], undefined);
+    assert(name in index);
   });
 }
