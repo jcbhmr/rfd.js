@@ -45,7 +45,7 @@ import {} from "npm:@bindrs/rfd";
 | Windows x32      | ❌          | ❌          | ❌          |
 | Windows arm64    | ❌          | ❌          | ❌          |
 | macOS x64        | ✅          | ✅          | ✅          |
-| macOS arm64      | ❌          | ❌          | ❌          |
+| macOS arm64      | ✅          | ✅          | ✅          |
 | Linux x64 gnu    | ✅          | ✅          | ✅          |
 | Linux x64 musl   | ❌          | ❌          | ❌          |
 | Linux arm gnu    | ❌          | ❌          | ❌          |
