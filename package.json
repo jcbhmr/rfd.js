@@ -1,7 +1,10 @@
 {
   "type": "commonjs",
   "name": "@bindrs/rfd",
-  "version": "2.2.2",
+  "version": "2.2.3",
+  "private": false,
+  "main": "index.js",
+  "types": "index.d.ts",
   "description": "📂 Lets you open native file picker and message boxes in JavaScript!",
   "keywords": [
     "bindings",
@@ -10,6 +13,9 @@
     "nodejs-addon",
     "rust"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "contributors": [
     "Jacob Hummer <jcbhmr@outlook.com> (https://jcbhmr.me/)"
@@ -18,9 +24,26 @@
   "repository": "github:bindrs/rfd",
   "bugs": "https://github.com/bindrs/rfd/issues",
   "exports": {
-    "deno": "./index.js",
-    "bun": "./index.js",
-    "node-addons": "./index.js"
+    "deno": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "bun": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "node-addons": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "node": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "default": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
   },
   "files": [
     "*.node",

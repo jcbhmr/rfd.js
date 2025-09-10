@@ -99,6 +99,14 @@ if (answer) {
 also refer to the original [rfd crate documentation] if you want to learn more
 about the features and limitations inherited from the Rust API.
 
+## Known Limitations
+
+### Focus Issues
+
+File dialogs may not always appear focused or on top of other windows. This is a known limitation of the underlying `rfd` crate. For better focus behavior:
+
+- Use synchronous dialogs (`FileDialog`, `MessageDialog`) instead of async ones when possible
+
 ## Development
 
 ![Rust](https://img.shields.io/static/v1?style=for-the-badge&message=Rust&color=000000&logo=Rust&logoColor=FFFFFF&label=)
